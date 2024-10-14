@@ -1,27 +1,27 @@
     const musicQuestion = [
     
         {
-            question: "Which of these is not a song on the album Graduation by Kanye West?",
-            options: ["I Wonder", "Big Brother", "The Glory", ],
-            correctAnswer: "Waves"
+            question: "Witch part of New York is the Hip Hop group Wu-Tang Clan from?",
+            options: ["Staten Island", "Brooklyn", "Queens", "Harlem" ],
+            correctAnswer: "Staten Island"
         },
         
         {
             question: "Who wrote the song Bad? (Relased 1987)",
-            options: ["Elvis", "Adele", "Billy Joel", "Michael Jackson" ],
+            options: ["Elvis", "Adele", "Billy Joel", "Michael Jackson"],
             correctAnswer: "Michael Jackson"
             
         },
         
         {
-            question: "Who is a member om The Beales",
+            question: "Who is a member om The Beatles",
             options: ["George Michael", "Eminem", "Mark Knofpler", "Ringo Starr" ],
             correctAnswer: "Ringo Starr"
         },
         
         {
             question: "What year was Blur's album Parklife relased?",
-            options: ["1998, 2001, 1972, 1994 "],
+            options: ["1998", "2001", "1972", "1994 "],
             correctAnswer: "1994"
         },
         
@@ -50,7 +50,7 @@
             correctAnswer: "J.K. Rowling"
         },
         {
-            question: "How many books/novels have Steven King written?",
+            question: "How many books/novels have Stephen King written?",
             options: ["29", "15", "98", "65"],
             correctAnswer: "65"
         },
@@ -64,10 +64,10 @@
 
 
 const mainContainer = document.getElementById("container")
-const subjectBtnMusic = document.getElementById("Subject-btn-1")
-const subjectBtnBooks = document.getElementById("Subject-btn-2")
-const quizContainer = document.getElementById("quiz-continer")
-const questions = document.getAnimations("questions")
+const subjectBtnMusic = document.getElementById("subject-btn-1")
+const subjectBtnBooks = document.getElementById("subject-btn-2")
+const quizContainer = document.getElementById("quiz-container")
+const questions = document.getElementById("questions")
 const option = document.getElementById("option")
 const nextBtn = document.getElementById("next-btn")
 const resultScreen = document.getElementById("result-screen")
@@ -78,13 +78,36 @@ let currentQuestionIndex = []
 let currentQuestion = 0
 let totalScore = 0
 
-subjectBtn1.addEventListener('click', (e) => {
-    console.log(e.target)
-    startQuiz(musicQuestions)
-})
+
+subjectBtnMusic.addEventListener("click", () => startQuiz(musicQuestion))
+subjectBtnBooks.addEventListener("click", () => startQuiz(BookQuestions))
+
+nextBtn.addEventListener("click", () => nextQuestion())
+retryBtn.addEventListener("click", () => retryQuiz())
+
+function startQuiz(quiz) {
+    currentQuestion = quiz
+    currentQuestionIndex = 0
+    totalScore = 0
+    container.classList.add("hide") 
+    quizContainer.classList.remove("hide")
+    loadQuiz()
+}
+
+function loadQuiz() {
+    const currentQuestions = currentQuestion[currentQuestionIndex]
+    questions.textContent = currentQuestions.question
+    option.innerHTML = ""   
 
 
-
-
+    currentQuestions.options.forEach(e => {
+        const button = document.createElement("button")
+        button.textContent = e
+        button.addEventListener("click", () => checkAnswer(e))
+        option.appendChild(button)
+        
+    });
+    nextBtn.classList.add("hide")
+}
 
 
