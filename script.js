@@ -1,7 +1,11 @@
+// import {musicQuestion, bookQuestions} from "../Uppgift-1-Quizapplikation/question.js"
+
+
+
     const musicQuestion = [
     
         {
-            question: "Witch part of New York is the Hip Hop group Wu-Tang Clan from?",
+            question: "Which part of New York is the Hip Hop group Wu-Tang Clan from?",
             options: ["Staten Island", "Brooklyn", "Queens", "Harlem" ],
             correctAnswer: "Staten Island"
         },
@@ -14,14 +18,14 @@
         },
         
         {
-            question: "Who is a member om The Beatles",
+            question: "Who is a member of The Beatles?",
             options: ["George Michael", "Eminem", "Mark Knofpler", "Ringo Starr" ],
             correctAnswer: "Ringo Starr"
         },
         
         {
-            question: "What year was Blur's album Parklife relased?",
-            options: ["1998", "2001", "1972", "1994 "],
+            question: "What year was Blur's album Parklife released?",
+            options: ["1998", "2001", "1972", "1994"],
             correctAnswer: "1994"
         },
         
@@ -33,7 +37,7 @@
         
     ]
 
-    const BookQuestions = [
+    const bookQuestions = [
         {
             question: "Who wrote the Harry Potter Books?",
             options: ["Alfred Nobel", "J.K. Rowling", "George Orwell", "Franz Kafka"],
@@ -41,7 +45,7 @@
         },
         {
             question: "When was the first Nobel Prize awarded?",
-            option: ["1892", "1924", "2001", "1901"],
+            options: ["1892", "1924", "2001", "1901"],
             correctAnswer: "1901"
         },
         {
@@ -50,7 +54,7 @@
             correctAnswer: "J.K. Rowling"
         },
         {
-            question: "How many books/novels have Stephen King written?",
+            question: "How many books/novels has Stephen King written?",
             options: ["29", "15", "98", "65"],
             correctAnswer: "65"
         },
@@ -77,18 +81,21 @@ const retryBtn = document.getElementById("retry-btn")
 let currentQuestionIndex = []
 let currentQuestion = 0
 let totalScore = 0
+let startTime
 
 
 subjectBtnMusic.addEventListener("click", () => startQuiz(musicQuestion))
-subjectBtnBooks.addEventListener("click", () => startQuiz(BookQuestions))
+subjectBtnBooks.addEventListener("click", () => startQuiz(bookQuestions))
 
-nextBtn.addEventListener("click", () => nextQuestion())
-retryBtn.addEventListener("click", () => retryQuiz())
+nextBtn.addEventListener("click", () => next())
+retryBtn.addEventListener("click", () => retry())
+
 
 function startQuiz(quiz) {
     currentQuestion = quiz
     currentQuestionIndex = 0
     totalScore = 0
+    startTime = Date.now()
     container.classList.add("hide") 
     quizContainer.classList.remove("hide")
     loadQuiz()
@@ -108,6 +115,48 @@ function loadQuiz() {
         
     });
     nextBtn.classList.add("hide")
+}
+
+function checkAnswer(selectedAnswer) {
+    const currentQuestionAnswer = currentQuestion[currentQuestionIndex]
+    const button = option.querySelectorAll("button")
+
+    button.forEach(button => {
+        if (button.textContent === currentQuestionAnswer.correctAnswer) {
+            button.classList.add("correct")
+        } else if (button.textContent === selectedAnswer) {
+            button.classList.add("incorrect")
+        }
+        button.disabled = true
+            
+    })
+
+    if(selectedAnswer === currentQuestionAnswer.correctAnswer) {
+        totalScore++
+    }
+    nextBtn.classList.remove("hide")
+}
+
+function next() {
+    currentQuestionIndex++
+    if (currentQuestionIndex < currentQuestion.length) {
+        loadQuiz()
+    } else {
+        showResult()
+    }
+}
+
+function showResult() {
+    quizContainer.classList.add("hide")
+    resultScreen.classList.remove("hide")
+    const endTime = Date.now()
+    const totalTime = (endTime - startTime) / 1000
+    result.textContent = `Du fick ${totalScore} av 5 och det tog ${totalTime.toFixed(2)} sekunder!`
+}
+
+function retry() {
+    resultScreen.classList.add("hide")
+    mainContainer.classList.remove("hide")
 }
 
 
