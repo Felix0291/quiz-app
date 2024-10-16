@@ -20,21 +20,25 @@ body {
 h1, h2, h3, p {
     display: flex;
     justify-content: center;
+    text-align: center;
+    width: 96%;
 }
 
 
 button {
     
-    width: 90%;
+    width: 96%;
+    height: 5vh;
     margin: 90%;
     flex: 1;
     padding: 10px 20px;
     margin: 10px;
     background-color: #dd92e7;
-    color: white;
+    color: rgba(246, 244, 244, 0.899);
     font-family: monospace;
+    font-size: 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
@@ -62,15 +66,34 @@ button:active {
 
 @media screen and (max-width: 600px) {
     body {
-        background-color: orange;
+        background-color:  #dd92e7;
     }
-    h1, h2, h3, p {
+    h1, h2, h3 {
         display: flex;
         justify-content: center;
-        font-size: x-small;
+        text-align: center;
+        font-size: 15px;
     }
-    button {
-        width: 90%;
+     
+     p {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-size: 10px;
+     }
+     button {
+        width: 96%;
+        margin: 90%;
+        flex: 1;
+        padding: 10px 20px;
+        margin: 2%;
+        background-color: rgb(230, 230, 183);
+        color: white;
+        font-family: monospace;
+        font-size: 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
     }
     
 }
