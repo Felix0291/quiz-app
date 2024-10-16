@@ -91,8 +91,17 @@ nextBtn.addEventListener("click", () => next())
 retryBtn.addEventListener("click", () => retry())
 
 
+
+function shuffle(arrays) {
+    for (let i = arrays.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arrays[i], arrays[j]] = [arrays[j], arrays[i]];
+    }
+    return arrays;
+}
+
 function startQuiz(quiz) {
-    currentQuestion = quiz
+    currentQuestion = shuffle([...quiz]);
     currentQuestionIndex = 0
     totalScore = 0
     startTime = Date.now()

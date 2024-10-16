@@ -5,8 +5,14 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: beige;
+    background-color: rgb(230, 230, 183);
 }
+/* 
+.main-container {
+    border-radius: 5px;
+    border-style: solid;
+    border-color: orange;
+} */
 
 .container {
     text-align: center;
@@ -61,8 +67,10 @@ button:active {
     h1, h2, h3, p {
         display: flex;
         justify-content: center;
+        font-size: x-small;
     }
     button {
-        width: 100%;
+        width: 90%;
     }
+    
 }
