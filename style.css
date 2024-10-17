@@ -7,12 +7,12 @@ body {
     margin: 0;
     background-color: rgb(230, 230, 183);
 }
-/* 
+
 .main-container {
     border-radius: 5px;
     border-style: solid;
-    border-color: orange;
-} */
+    border-color: white
+}
 
 .container {
     text-align: center;
@@ -63,6 +63,13 @@ button:active {
     background-color: rgb(234, 114, 114);
 }
 
+#display-time {
+    display: flex;
+    justify-content: center;
+    color: black;
+    margin-top: 20px;
+    font-size: 24px;
+}
 
 @media screen and (max-width: 600px) {
     body {

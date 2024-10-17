@@ -5,30 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quizapplikation</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <script type="module" defer src="script.js"></script>
 </head>
 <body>
     <div class="main-container">
 
     <div id="container" class="container">
-        <h1>Felix Quizapplikation</h1>
-        <p>Välj ett av två ämnen och svara på 5 frågor!</p>
-        <button id="subject-btn-1">Musik</button>
-        <button id="subject-btn-2">Böcker</button>
+        <h1>Felix Quiz</h1>
+        <p>Choose one of two topics and answer 5 questions</p>
+        <button id="subject-btn-1">Music</button>
+        <button id="subject-btn-2">Books</button>
     </div>
         
 
     <div id="quiz-container" class="hide">
         <h3 id="questions"></h3>
         <div id="option"></div>
-        <button id="next-btn" class="hide">Nästa fråga!</button>
+        <button id="next-btn" class="hide">Next question</button>
+        <div id="display-time"></div>
         </div>
 
 
         <div id="result-screen" class="hide">
-            <h2>Quiz Slut!</h2>
+            <h2>Quiz Ended!</h2>
             <p id="result"></p>
-            <button id="retry-btn">Prova igen!</button>
+            <button id="retry-btn">Try Again!</button>
         </div>
     </div>
     

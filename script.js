@@ -1,66 +1,4 @@
-const musicQuestions = [
-    
-    {
-        question: "Which part of New York is the Hip Hop group Wu-Tang Clan from?",
-        options: ["Staten Island", "Brooklyn", "Queens", "Harlem" ],
-        correctAnswer: "Staten Island"
-    },
-    
-    {
-        question: "Who wrote the song Bad? (Relased 1987)",
-        options: ["Elvis", "Adele", "Billy Joel", "Michael Jackson"],
-        correctAnswer: "Michael Jackson"
-        
-    },
-    
-    {
-        question: "Who is a member of The Beatles?",
-        options: ["George Michael", "Eminem", "Mark Knofpler", "Ringo Starr" ],
-        correctAnswer: "Ringo Starr"
-    },
-    
-    {
-        question: "What year was Blur's album Parklife released?",
-        options: ["1998", "2001", "1972", "1994"],
-        correctAnswer: "1994"
-    },
-    
-    {
-        question: "How many studio albums have Taylor Swift released?",
-        options: ["10", "18", "5", "11" ],
-        correctAnswer: "11"
-    },
-    
-]
-
-const bookQuestions = [
-    {
-        question: "Who wrote the Harry Potter Books?",
-        options: ["Alfred Nobel", "J.K. Rowling", "George Orwell", "Franz Kafka"],
-        correctAnswer: "J.K. Rowling"
-    },
-    {
-        question: "When was the first Nobel Prize awarded?",
-        options: ["1892", "1924", "2001", "1901"],
-        correctAnswer: "1901"
-    },
-    {
-        question: "Who wrote the famous quote: To be, or not to be?",
-        options: ["Erik Carr", "William Shakespear", "Charles Dickens", "T.S. Eliot"],
-        correctAnswer: "J.K. Rowling"
-    },
-    {
-        question: "How many books/novels has Stephen King written?",
-        options: ["29", "15", "98", "65"],
-        correctAnswer: "65"
-    },
-    {
-        question: "Who turned the Lord Of The Rings books in to movies?",
-        options: ["Cristopher Nolan", "Peter Jackson", "Quention Tarantiono", "Martin Scorsese" ],
-        correctAnswer: "Peter Jackson"
-    },
-    
-]
+import { musicQuestions, bookQuestions } from "./question.js"
 
 const mainContainer = document.getElementById("container")
 const subjectBtnMusic = document.getElementById("subject-btn-1")
@@ -72,11 +10,13 @@ const nextBtn = document.getElementById("next-btn")
 const resultScreen = document.getElementById("result-screen")
 const result = document.getElementById("result")
 const retryBtn = document.getElementById("retry-btn")
+const displayTime = document.getElementById("display-time")
 
 let currentQuestionIndex = []
 let currentQuestion = 0
 let totalScore = 0
 let startTime
+let intervalID
 
 
 subjectBtnMusic.addEventListener("click", () => startQuiz(musicQuestions))
@@ -86,7 +26,6 @@ nextBtn.addEventListener("click", () => next())
 retryBtn.addEventListener("click", () => retry())
 
 
-
 function shuffle(arrays) {
     for (let i = arrays.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -94,15 +33,27 @@ function shuffle(arrays) {
     }
     return arrays;
 }
+function updateTime() {
+    const now = Date.now()
+    const elapsedTime = now - startTime
+    const seconds = Math.floor(elapsedTime / 1000) % 60
+    const minutes = Math.floor(elapsedTime / 60000) % 60
+    const hours = Math.floor(elapsedTime / 360000) % 60
+    displayTime.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+}
+
 
 function startQuiz(quiz) {
-    currentQuestion = shuffle([...quiz]);
+    currentQuestion = shuffle([...quiz])
     currentQuestionIndex = 0
     totalScore = 0
     startTime = Date.now()
     container.classList.add("hide") 
     quizContainer.classList.remove("hide")
     loadQuiz()
+    clearInterval(intervalID)
+    intervalID = setInterval(updateTime, 10)
+    
 }
 
 function loadQuiz() {
@@ -155,12 +106,14 @@ function showResult() {
     resultScreen.classList.remove("hide")
     const endTime = Date.now()
     const totalTime = (endTime - startTime) / 1000
-    result.textContent = `Du fick ${totalScore} av 5 och det tog ${totalTime.toFixed(2)} sekunder!`
+    result.textContent = `You got ${totalScore} of 5, and it took you    ${totalTime.toFixed(2)} seconds!`
+    clearInterval(intervalID)
 }
 
 function retry() {
     resultScreen.classList.add("hide")
     mainContainer.classList.remove("hide")
+    displayTime.textContent = "00:00:00"
+    clearInterval(intervalID)
 }
-
 
