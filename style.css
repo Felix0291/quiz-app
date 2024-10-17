@@ -8,12 +8,6 @@ body {
     background-color: rgb(230, 230, 183);
 }
 
-.main-container {
-    border-radius: 5px;
-    border-style: solid;
-    border-color: white
-}
-
 .container {
     text-align: center;
 }
@@ -73,7 +67,7 @@ button:active {
 
 @media screen and (max-width: 600px) {
     body {
-        background-color:  #dd92e7;
+        background-color:  rgb(230, 230, 183);
     }
     h1, h2, h3 {
         display: flex;
@@ -94,7 +88,7 @@ button:active {
         flex: 1;
         padding: 10px 20px;
         margin: 2%;
-        background-color: rgb(230, 230, 183);
+        background-color: #dd92e7;;
         color: white;
         font-family: monospace;
         font-size: 15px;
